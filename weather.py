@@ -4,7 +4,7 @@ import sys
 import json
 import argparse
 import urllib
-from urllib3 import HTTPError, URLError
+from urllib.error import HTTPError, URLError
 
 ## response construction and return
 def write_http_response(status, body_dict):
