@@ -1,66 +1,32 @@
-## importing required libraries
-import os
-import sys
-import json
-import argparse
 import urllib
-from urllib.error import HTTPError, URLError
+import logging
 
-## response construction and return
-def write_http_response(status, body_dict):
-    return_dict = {
-        "status": status,
-        "body": body_dict,
-        "headers": {
-            "Content-Type": "application/json"
-        }
-    }
-    output = open(os.environ['res'], 'w')
-    output.write(json.dumps(return_dict))
+import azure.functions as func
 
-## extract input parameter values
-zip = os.environ['req_query_zip']
-countrycode = os.environ['req_query_countrycode']
-apikey = os.environ['req_query_apikey']
+def main(req: func.HttpRequest) -> func.HttpResponse:
+    logging.info('Python HTTP trigger function processed a request.')
 
-print ("zip code value::" + zip + ", countrycode:" + countrycode + ", apikey::" + apikey)
+    zipcode = req.params.get('zip')
+    apikey = req.params.get('apikey')
 
+    if zipcode and apikey:
+        ## construct full URL to invoke OpenWeatherMap service with proper inputs
+        baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
+        completeUrl = f"{baseUrl}?zip={zipcode}&appid={apikey}"
+        logging.info('Request URL--> ' + completeUrl)
+    else:
+        logging.info("URL required args missing." )
+        return func.HttpResponse("URL args required ?zip=XXXXX&apikey=YOUR_API_KEY." )
 
-## construct full URL to invoke OpenWeatherMap service with proper inputs
-baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
-completeUrl = baseUrl + '?zip=' + zip + ',' + countrycode + '&appid=' + apikey
-print('Request URL--> ' + completeUrl)
-
-## Invoke OpenWeatherMap API and parse response with proper exception handling
-try:
-    apiresponse = urllib.urlopen(completeUrl)
-except IOError as e:
-    error = "IOError - The server couldn't fulfill the request."
-    print(error)
-    print("I/O error: {0}".format(e))
-    errorcode = format(e[1])
-    errorreason = format(e[2])
-    write_http_response(errorcode, errorreason)
-except HTTPError as e:
-    error = "The server couldn't fulfill the request."
-    print(error)
-    print('Error code: ', e.code)
-    write_http_response(e.code, error)
-except URLError as e:
-    error = "We failed to reach a server."
-    print(error)
-    print('Reason: ', e.reason)
-    write_http_response(e.code, error)
-    
-else:
-    headers = apiresponse.info()
-    print('DATE :', headers['date'])
-    print('HEADERS :')
-    print('---------')
-    print(headers)
-    print('DATA :')
-    print('---------')
-    response = apiresponse.read().decode('utf-8')
-    print(response)
-    write_http_response(200, response)
-    
+    ## Invoke OpenWeatherMap API and parse response with proper exception handling
+    try:
+        apiresponse = urllib.request.urlopen(completeUrl)
+        return func.HttpResponse(response)
+    except HTTPError as e:
+        return func.HttpResponse(
+            "The server couldn't fulfill the request. Error code:" + e.code,
+            status_code=e.code )
+    except URLError as e:
+        return func.HttpResponse(
+                    "We failed to reach a server. Reason:" + e.reason,
+            status_code=e.code )
