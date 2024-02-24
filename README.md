@@ -1,9 +1,19 @@
 # it718-weather
-Azure function implementation for weather app from IT718 textbook. Cloud Native Architectures, Copyright © 2018 Packt Publishing 
-Code from the Azure chapter was modified to drop use of: urllib2, os.environ[] calls, and printing to a console no one is likely to see.
+Complete overhaul of the Azure function implementation for weather app from IT718 textbook. Cloud Native Architectures, Copyright © 2018 Packt Publishing 
 
-### Register a free account at [openweathermap](https://openweathermap.org/).  Securely store your API key.
+### Requirements:
+- Register for a free account at [openweathermap](https://openweathermap.org/).  Securely store your API key.
+- Register for a free account at [swagger.io](https://swagger.io/tools/).
+- Access to a cloud CLI to build application (AWS, Azure, and|or GCP)
+- Function code is based on Python 3.12
 
+### General steps
+- Review the API yaml in this repo with: [Swagger Editor](https://editor.swagger.io/).  [Original yaml source](https://gist.github.com/KPS250/7d1cfc06caefe82ba008eccf911bb3af)
+
+---
+### The bare minimum process for AWS
+1. Create a new Lambda function.  
+---
 ### The bare minimum process for Azure
 1. Create a new Azure Function App.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.  Defaults for everything else is fine.  
 2. Wait until the Function App shows "Your deployment is complete", then click "Go to Resource".  
