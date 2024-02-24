@@ -75,6 +75,7 @@ components:
   securitySchemes:
     app_id:
       type: apiKey
-      description: API key to authorize requests. If you don't have an OpenWeatherMap API key, use `0e42a4c3dff34f7e42dbfcd804a5c917`
+      description: API key to authorize requests.
       name: appid
       in: query
+      
