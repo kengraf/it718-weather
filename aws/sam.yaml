@@ -5,7 +5,7 @@ Description: A Swagger UI for AWS API Gateway.
 Parameters:
   SwaggerSpecURL:
     Type: String
-    Default: https://petstore.swagger.io/v2/swagger.json
+    Default: https://raw.githubusercontent.com/kengraf/it718-weather/main/openweatherapi.yaml
     Description: Enter a publicly accessible URL to the Swagger spec JSON/YAML.
 
 Resources:
