@@ -12,27 +12,22 @@ Resources:
   SwaggerUiFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Description: The Lambda function that serves the Swagger UI.
-      CodeUri: swagger-ui/
-      Handler: app.handler
-      Runtime: nodejs12.x
+      Description: The Lambda function that serves the OpenWeather API.
+      CodeUri: ./
+      Handler: weatherapi.lambda_handler
+      Runtime: python3.8
       Environment:
         Variables:
           SWAGGER_SPEC_URL: !Ref SwaggerSpecURL
       Events:
-        SwaggerUiApi:
+        WeatherApi:
           Type: Api
           Properties:
-            Path: /api-docs
-            Method: GET
-        SwaggerUiApiProxy:
-          Type: Api
-          Properties:
-            Path: /api-docs/{proxy+}
+            Path: /weather
             Method: GET
 
 Outputs:
   SwaggerUiUrl:
-    Description: Swagger UI URL
-    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api-docs/
+    Description: API Gateway endpoint URL for Prod stage
+    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/weather/
         
