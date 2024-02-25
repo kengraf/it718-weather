@@ -20,14 +20,13 @@ externalDocs:
 servers:
 - url: "https://api.openweathermap.org/data/2.5/"
 
-security:
-- app_id: []
-
 # Path Defination for API
 
 paths:
   /weather:
     get:
+      security:
+      - app_id: []
       tags:
       - Current Weather Data
       summary: "Call current weather data for one location"
@@ -35,18 +34,11 @@ paths:
       operationId: CurrentWeatherData
       parameters:
         - in: query 
-          name: lat
-          description: "For the query value, type the location latitude. Example: 43.13"
+          name: zip
+          description: "For the query value, type the US based zipcode. Example: 03824"
           schema:
-            type: number
-            default: 43.13
-          required: true
-        - in: query
-          name: lon
-          description: "For the query value, type the location longitude. Example: 70.92"
-          schema:
-            type: number
-            default: -70.92
+            type: string
+            default: "03824"
           required: true
         - in: query
           name: appid
@@ -55,6 +47,12 @@ paths:
             type: string
             default: ""
           required: true
+        - in: query
+          name: units
+          description: "Units of measure: kelvin(default), metric, imperial"
+          schema:
+            type: string
+            default: ""
           
       responses:
         200:
@@ -62,6 +60,8 @@ paths:
           content:
             application/json: {}
 
+        401:
+           $ref: "#/components/responses/UnauthorizedError"
         404:
           description: Not found response
           content:
@@ -78,4 +78,10 @@ components:
       description: API key to authorize requests.
       name: appid
       in: query
-      
+  responses:
+    UnauthorizedError:
+      description: API key is missing or invalid
+      headers:
+        WWW_Authenticate:
+          schema:
+            type: string
