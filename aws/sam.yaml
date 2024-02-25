@@ -14,8 +14,8 @@ Resources:
     Properties:
       Description: The Lambda function that serves the OpenWeather API.
       CodeUri: ./
-      Handler: weatherapi.lambda_handler
-      Runtime: python3.8
+      Handler: index.handler
+      Runtime: python3.10
       Environment:
         Variables:
           SWAGGER_SPEC_URL: !Ref SwaggerSpecURL
