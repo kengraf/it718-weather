@@ -1,5 +1,8 @@
 The deployment uses AWS SAM
 
+Store your openweather api key as a secret in AWS SecretsManager.
+The keyname must match "openweather-apikey" as the name is hardcoded in the Lambda function.
+
 ```
 cd ./aws
 sam build
