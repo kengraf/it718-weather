@@ -1,4 +1,12 @@
+The deployment uses AWS SAM
 
+```
+cd ./aws
+sam build
+sam deploy
+```
+
+This will create a CloudFormation stack with a REST API and Lambda function resources.
 Built Artifacts  : .aws-sam/build
 Built Template   : .aws-sam/build/template.yaml
 
