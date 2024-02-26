@@ -6,10 +6,9 @@ def lambda_handler(event, context):
     status_code = 200
     response_message = ''
     query_params = event.get('queryStringParameters', {})
-    zip = query_params.get('zip', '03824')  
-
+    zipcode = query_params.get('zip')
     
-    if zipcode:
+    if len(zipcode) == 5:
         apikey = get_secret('opeweatherapi-apikey')
         ## construct full URL to invoke OpenWeatherMap service with proper inputs
         baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
@@ -41,7 +40,7 @@ def get_secret(secret_name):
     client = boto3.client('secretsmanager')
 
     try:
-        get_secret_value_response = client.get_secret_value(secret_name)
+        get_secret_value_response = client.get_secret_value(SecretIdsecret_name,)
     except ClientError as e:
         # For a list of exceptions thrown, see
         # https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_GetSecretValue.html
@@ -51,4 +50,3 @@ def get_secret(secret_name):
 
     # Your code goes here.
     return( secret )
-
