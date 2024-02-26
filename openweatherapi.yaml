@@ -40,19 +40,6 @@ paths:
             type: string
             default: "03824"
           required: true
-        - in: query
-          name: appid
-          description: "For the query value, type your API key. Example: 32 hexidecimal digits"
-          schema:
-            type: string
-            default: ""
-          required: true
-        - in: query
-          name: units
-          description: "Units of measure: kelvin(default), metric, imperial"
-          schema:
-            type: string
-            default: ""
           
       responses:
         200:
