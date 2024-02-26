@@ -16,7 +16,9 @@ curl https://api.openweathermap.org/data/2.5/weather?zip={zipcode}}&appid={API k
 ```
 
 You will receive a response like this: 
+```
 {"coord":{"lon":-70.8475,"lat":43.0353},"weather":\[{"id":701,"main":"Mist","description":"mist","icon":"50d"},{"id":501,"main":"Rain","description":"moderate rain","icon":"10d"}\],"base":"stations","main":{"temp":274.34,"feels_like":270.25,"temp_min":273.3,"temp_max":275.5,"pressure":1010,"humidity":91},"visibility":1006,"wind":{"speed":4.12,"deg":90,"gust":8.75},"rain":{"1h":1.42},"clouds":{"all":100},"dt":1677612774,"sys":{"type":1,"id":5415,"country":"US","sunrise":1677583302,"sunset":1677623435},"timezone":-18000,"id":0,"name":"Greenland","cod":200}
+```
 ---
 ### Summary of AWS implementation
 - Serverless application model (SAM) to build a CloudFormation stack
@@ -24,15 +26,19 @@ You will receive a response like this:
 - SecretsManager is used to hold the OpenWeather apikey
 - URL template: https://{AWS-API-ID}.execute-api.{AWS-REGION}.amazonaws.com/Prod/weather?zip=00000
 ---
-### The bare minimum process for Azure
-1. Create a new Azure Function App.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.  Defaults for everything else is fine.  
-2. Wait until the Function App shows "Your deployment is complete", then click "Go to Resource".  
-3. Click "Functions" and create a new function.  Select "HTTP trigger", set the function trigger name, set Authorization level to anonymous.  
-4. Click "Code & Test".  Replace the generated code for __init__.py with the code from this repo.  No changes are need for function.json.  
-5. Click "SAve" then "Test/Run".  Set method to GET, add zip and apikey parameters, then click "Run".  The function should work.
-6. Click "Get function URL".  In browser or with curl "https://~~YOUR_URL~~?zip=~~XXXXX~~&apikey=~~YOUR_API_KEY~~"
+### Summary of Azure implementation
+- Create a new Azure Function App.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.  Defaults for everything else is fine.
+- CLI using az command [process](https://learn.microsoft.com/en-us/azure/azure-functions/deployment-zip-push)
+```
+   az functionapp deployment source config-zip -g <resource_group> -n <app_name> --src <zip_file_path>
+```
+- Wait until the Function App shows "Your deployment is complete", then click "Go to Resource".  
+- Click "Functions" and create a new function.  Select "HTTP trigger", set the function trigger name, set Authorization level to anonymous.  
+- Click "Code & Test".  Replace the generated code for __init__.py with the code from this repo.  No changes are need for function.json.  
+7. Click "Save" then "Test/Run".  Set method to GET, add zip and apikey parameters, then click "Run".  The function should work.
+8. Click "Get function URL".  In browser or with curl "https://~~YOUR_URL~~?zip=~~XXXXX~~&apikey=~~YOUR_API_KEY~~"
 
--URL template: http://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>
+- URL template: http://<APP_NAME>.azurewebsites.net/api/<FUNCTION_NAME>
 
 
 
