@@ -17,5 +17,5 @@ Built Template   : .aws-sam/build/template.yaml
 Although specified as documented by AWS, the SAM policy does not make it
 into the generated role.  
 
-*FIX* In the Lambda console. Open the attached role, then add "SecretsManagerReadWrite" policy.
+*FIX* In the Lambda console. Open the attached role, then "Add Permissions", select&add "SecretsManagerReadWrite" policy.
 
