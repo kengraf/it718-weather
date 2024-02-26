@@ -11,7 +11,7 @@ def lambda_handler(event, context):
         zipcode = query_params.get('zip')
     
     if len(zipcode) == 5:
-        apikey = get_secret('opeweatherapi-apikey')
+        apikey = get_secret('openweather-apikey')
         ## construct full URL to invoke OpenWeatherMap service with proper inputs
         baseUrl = 'http://api.openweathermap.org/data/2.5/weather'
         completeUrl = f"{baseUrl}?zip={zipcode}&appid={apikey}"
@@ -37,8 +37,6 @@ def lambda_handler(event, context):
     }
 
 def get_secret(secret_name):
-    secret_name = "opeweatherapi-apikey"
-
     # Create a Secrets Manager client
     client = boto3.client('secretsmanager')
 
@@ -50,5 +48,5 @@ def get_secret(secret_name):
         raise e
 
     secret = get_secret_value_response['SecretString']
-    key = json.loads(secret)['openweatherapikey']
+    key = json.loads(secret)['openweather-apikey']
     return( key )
