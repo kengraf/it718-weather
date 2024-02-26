@@ -15,10 +15,10 @@ Resources:
       Description: The Lambda function that serves the OpenWeather API.
       CodeUri: ./
       Handler: openweather.lambda_handler
-      Runtime: python3.10
+      Runtime: python3.9
       Policies:
-      # Give the Lambda service access to poll your DynamoDB Stream
-        - SecretsManagerReadWrite
+      # Give the Lambda service access to retrive API key
+      - SecretsManagerReadWrite
       Environment:
         Variables:
           SWAGGER_SPEC_URL: !Ref SwaggerSpecURL
@@ -32,5 +32,5 @@ Resources:
 Outputs:
   SwaggerUiUrl:
     Description: API Gateway endpoint URL for Prod stage
-    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/weather/
+    Value: !Sub https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/weather?zip=10001
         
