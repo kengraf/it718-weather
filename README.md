@@ -5,21 +5,22 @@ Complete overhaul of the Azure function implementation for weather app from IT71
 - Register for a free account at [openweathermap.org](https://openweathermap.org/).  Securely store your API key.
 - Register for a free account at [swagger.io](https://swagger.io/tools/).
 - Access to a cloud CLI is assumed to run commands and the build application (AWS, Azure, and|or GCP).
-- Function code is based on Python 3.12
+- Function code is based on Python 3.9
 
 ### General steps
 - Review the API yaml in this repo with: [Swagger Editor](https://editor.swagger.io/).  The intent is to reuse this yaml for AWS, Azure, and GCP.
 
-### Define and validate the API definition by making calls directly to the source
 Requests have the following format
 ```
 curl https://api.openweathermap.org/data/2.5/weather?zip={zipcode}}&appid={API key}
 ```
 
 ---
-### The bare minimum process for AWS
-1. Create a new Lambda function.
-2. 
+### Summary of AWS implementation
+- Serverless application model (SAM) to build a CloudFormation stack
+- API Gateway invokes a python based lambda function
+- SecretsManager is used to hold the OpenWeather apikey
+- URL template: https://{AWS-API-ID}.execute-api.{AWS-REGION}.amazonaws.com/Prod/weather?zip=00000
 ---
 ### The bare minimum process for Azure
 1. Create a new Azure Function App.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.  Defaults for everything else is fine.  
