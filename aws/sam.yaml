@@ -16,6 +16,9 @@ Resources:
       CodeUri: ./
       Handler: openweather.lambda_handler
       Runtime: python3.10
+      Policies:
+      # Give the Lambda service access to poll your DynamoDB Stream
+        - SecretsManagerReadWrite
       Environment:
         Variables:
           SWAGGER_SPEC_URL: !Ref SwaggerSpecURL
