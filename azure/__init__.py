@@ -16,7 +16,7 @@ def main(req: func.HttpRequest) -> func.HttpResponse:
         logging.info('Request URL--> ' + completeUrl)
     else:
         logging.info("URL required args missing." )
-        return func.HttpResponse("URL args required ?zip=XXXXX&apikey=YOUR_API_KEY." )
+        return func.HttpResponse("URL args required ?zip=XXXXX&apiid=YOUR_API_KEY." )
 
     ## Invoke OpenWeatherMap API and parse response with proper exception handling
     try:
