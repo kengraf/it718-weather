@@ -29,8 +29,7 @@ You will receive a response like this:
 ### Summary of Azure implementation
 - Create a new Azure Function App and a HTTP trigger.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.
 - No secrets management, Key Vault not used.
-- 
-
+- Support only for language version 1 not 2. i.e no decorater use
 
 
 
