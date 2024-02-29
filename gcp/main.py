@@ -1,5 +1,5 @@
 import json
-import urllib
+import urllib 
 from google.cloud import secretmanager
 
 def get_weather(request):
