@@ -21,17 +21,23 @@ You will receive a response like this:
 ```
 ---
 ### Summary of AWS implementation
+- Components: ApiGateway invoking a Lambda function.  API key managed with SecretManager.
 - Serverless application model (SAM) to build a CloudFormation stack
 - API Gateway invokes a python based lambda function
 - SecretsManager is used to hold the OpenWeather apikey
 - URL template: https://{AWS-API-ID}.execute-api.{AWS-REGION}.amazonaws.com/Prod/weather?zip=00000
 ---
 ### Summary of Azure implementation
-- Create a new Azure Function App and a HTTP trigger.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.
+- Components: HTTP trigger invoking a Function App
+- Steps:
+  - Create a new Azure Function App.  The function app name needs to be globally unique.  Runtime stack is Python 3.9.
+  - Create a HTTP trigger with anonymous authentication
 - No secrets management, Key Vault not used.
 - Support only for language version 1 not 2. i.e no decorater use
-
-
+---
+### Summary of GCP implementation
+- Components: Cloud Function
+- Goggle: [Quickstart](https://cloud.google.com/functions/docs/console-quickstart)
 
 ### Food for thought
 - Github workflow.  This repo would need to add the required plumbing, because Function Apps can not be modfied in the console if Github integration is turned on.  
