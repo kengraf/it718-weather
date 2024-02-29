@@ -1,4 +1,3 @@
-import boto3
 import json
 import urllib
 
@@ -8,7 +7,7 @@ def get_weather(request):
 
     # Check if parameters exist
     if params and 'zip' in params:
-        zipcode = params['message']
+        zipcode = params['zip']
     
     if zipcode and len(zipcode) == 5:
         apikey = get_secret('openweather-apikey')
