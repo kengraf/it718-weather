@@ -1,6 +1,6 @@
 import json
 import urllib
-from google.cloud import secretmanager_v1beta1 as secretmanager
+import google.cloud.secretmanager as secretmanager
 
 def get_weather(request):
     # Extract query parameters from the request
