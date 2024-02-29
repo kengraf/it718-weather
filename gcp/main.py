@@ -27,4 +27,4 @@ def get_weather(request):
         return 'URL args required ?zip=XXXXX',400
 
 def get_secret(secret_name):
-    return( 'bf9ca2bcc1017086a8a69247d7a21dc0' )
+    return( '' )
