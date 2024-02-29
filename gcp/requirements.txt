@@ -1,1 +1,1 @@
-google.cloud.secretmanager
+google-cloud-secret-manager==2.1.0
