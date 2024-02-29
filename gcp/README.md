@@ -1,9 +1,14 @@
+### Setup
 Enable billing for your project
-In IAM: enable "Secret Manager, Secret Accessor privledge for App Engine default service account
-
 Stash OpenWeather API key in SecretsManager
 
-GCP Cloud shell commands to build and deploy your function
+### Set privs
+In IAM: enable "Secret Manager, Secret Accessor" privledge for App Engine default service account
+```
+gcloud projects add-iam-policy-binding <YOUR-PROJECT-ID> --member=serviceAccount:<YOUR-PROJECT-ID>@appspot.gserviceaccount.com --role=roles/secretmanager.secretAccessor
+```
+
+### GCP Cloud shell commands to build and deploy
 ```
 gcloud config set project unh-it718
 gcloud services enable cloudfunctions.googleapis.com
