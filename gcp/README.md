@@ -3,7 +3,7 @@ Enable billing for your project
 Stash OpenWeather API key in SecretsManager
 
 ### Set privs
-In IAM: enable "Secret Manager, Secret Accessor" privledge for App Engine default service account
+In IAM: enable "Secret Manager, Secret Accessor" privilege for App Engine default service account
 ```
 gcloud projects add-iam-policy-binding <YOUR-PROJECT-ID> --member=serviceAccount:<YOUR-PROJECT-ID>@appspot.gserviceaccount.com --role=roles/secretmanager.secretAccessor
 ```
